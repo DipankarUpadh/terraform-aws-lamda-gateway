@@ -50,7 +50,7 @@ resource "aws_lambda_function" "lambda_java" {
   role = aws_iam_role.lambda_exec.arn
   runtime = "java11"
   handler = "com.lambda.Basic::handle"
-  filename = "AwsLamda.jar"
+  filename = locals.jar_filename
 }
 
 resource "aws_cloudwatch_log_group" "lambda_java" {
