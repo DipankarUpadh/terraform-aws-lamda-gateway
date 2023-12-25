@@ -38,5 +38,5 @@ resource "aws_s3_object" "lambda_java" {
   key    = "AwsLamda.zip"
   source = "AwsLamda.zip"
 
-  etag = filemd5("${path.module}/AwsLamda.zip")
+  etag = filemd5("AwsLamda.zip")
 }
