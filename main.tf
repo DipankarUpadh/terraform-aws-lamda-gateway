@@ -41,16 +41,14 @@ resource "aws_s3_object" "lambda_java" {
   etag = filemd5("AwsLamda.jar")
 }
 
-locals {
-    jar_filename = "AwsLamda.jar"
-}
 
 resource "aws_lambda_function" "lambda_java" {
   function_name = "t_lambda_java"
   role = aws_iam_role.lambda_exec.arn
   runtime = "java11"
   handler = "com.lambda.Basic::handle"
-  filename = locals.jar_filename
+  filename = "AwsLamda.jar"
+  source_code_hash = filebase64sha256("AwsLamda.jar")
 }
 
 resource "aws_cloudwatch_log_group" "lambda_java" {
