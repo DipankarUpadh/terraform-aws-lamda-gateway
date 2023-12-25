@@ -51,7 +51,7 @@ resource "aws_lambda_function" "lambda_java" {
   runtime = "Java 11"
   handler = "Basic.handle"
 
-  source_code_hash = AwsLamda.jar.output_base64sha256
+  source_code_hash = base64sha256(filebase64(AwsLamda.jar))
 
   role = aws_iam_role.lambda_exec.arn
 }
