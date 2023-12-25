@@ -2,12 +2,6 @@
 # SPDX-License-Identifier: MPL-2.0
 
 terraform {
-  cloud {
-	organization = "Dips"
-    workspaces {
-       name = "aws-cloud-ws"
-    }
-  }
 
   required_providers {
     aws = {
