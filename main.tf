@@ -35,8 +35,8 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
 resource "aws_s3_object" "lambda_java" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
-  key    = "AwsLamda.zip"
-  source = "AwsLamda.zip"
+  key    = "AwsLamda.jar"
+  source = "AwsLamda.jar"
 
-  etag = filemd5("AwsLamda.zip")
+  etag = filemd5("AwsLamda.jar")
 }
