@@ -3,11 +3,12 @@
 
 terraform {
 
-  # cloud {
-  #   workspaces {
-  #     name = "learn-terraform-lambda-api-gateway"
-  #   }
-  # }
+  cloud {
+	organization = "Dips"
+    workspaces {
+       name = "aws-cloud-ws"
+    }
+  }
 
   required_providers {
     aws = {
