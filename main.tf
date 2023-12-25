@@ -50,10 +50,7 @@ resource "aws_lambda_function" "lambda_java" {
   role = aws_iam_role.lambda_exec.arn
   runtime = "Java 11"
   handler = "Basic.handle"
-  source_code_hash = base64sha256(filebase64(locals.jar_filename))
-  
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_java.key
+  filename = "AwsLamda.jar"
 }
 
 resource "aws_cloudwatch_log_group" "lambda_java" {
