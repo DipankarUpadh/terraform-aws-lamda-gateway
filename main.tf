@@ -49,7 +49,7 @@ resource "aws_lambda_function" "lambda_java" {
   function_name = "LambdaJava"
   role = aws_iam_role.lambda_exec.arn
   runtime = "java11"
-  handler = "Basic.handle"
+  handler = "com.lambda.Basic::handle"
   filename = "AwsLamda.jar"
 }
 
