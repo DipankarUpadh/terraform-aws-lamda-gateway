@@ -48,7 +48,7 @@ locals {
 resource "aws_lambda_function" "lambda_java" {
   function_name = "LambdaJava"
   role = aws_iam_role.lambda_exec.arn
-  runtime = "Java11"
+  runtime = "java11"
   handler = "Basic.handle"
   filename = "AwsLamda.jar"
 }
