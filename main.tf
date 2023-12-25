@@ -11,7 +11,7 @@ provider "aws" {
 
 resource "random_pet" "lambda_bucket_name" {
   prefix = "terraform-functions"
-  length = 4
+  length = 2
 }
 
 resource "aws_s3_bucket" "lambda_bucket" {
@@ -30,4 +30,13 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
 
   bucket = aws_s3_bucket.lambda_bucket.id
   acl    = "private"
+}
+
+resource "aws_s3_object" "lambda_java" {
+  bucket = aws_s3_bucket.lambda_bucket.id
+
+  key    = "AwsLamda.zip"
+  source = "${path.module}/AwsLamda.zip"
+
+  etag = filemd5("${path.module}/AwsLamda.zip")
 }
