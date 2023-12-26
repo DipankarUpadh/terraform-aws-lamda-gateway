@@ -55,5 +55,5 @@ resource "aws_lambda_permission" "api_gw" {
   function_name = aws_lambda_function.lambda_java.t_lambda_java
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
+  source_arn = "${aws_apigatewayv2_api.gateway.execution_arn}/*/*"
 }
