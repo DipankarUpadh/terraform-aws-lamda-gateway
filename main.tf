@@ -49,6 +49,8 @@ resource "aws_lambda_function" "lambda_java" {
   handler = "com.lambda.Basic::handle"
   filename = "AwsLamda.jar"
   source_code_hash = filebase64sha256("AwsLamda.jar")
+  memory_size = 256
+  timeout = 60
 }
 
 resource "aws_cloudwatch_log_group" "lambda_java" {
