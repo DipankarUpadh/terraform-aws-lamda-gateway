@@ -58,7 +58,7 @@ data "archive_file" "archive" {
 resource "aws_s3_object" "s3_lambda_node" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
-  key    = nodeKeyName
+  key    = local.nodeKeyName
   source = data.archive_file.archive.output_path
 
   etag = filemd5(data.archive_file.archive.output_path)
