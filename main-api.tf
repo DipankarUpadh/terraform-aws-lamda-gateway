@@ -29,7 +29,7 @@ resource "aws_apigatewayv2_stage" "gateway" {
 }
 
 resource "aws_apigatewayv2_integration" "integration" {
-  api_id = aws_apigatewayv2_api.gateway.id
+  api_id = aws_apigatewayv2_api.api_gateway.id
 
   integration_uri    = aws_lambda_function.lambda_java.invoke_arn
   integration_type   = "AWS_PROXY"
@@ -37,14 +37,14 @@ resource "aws_apigatewayv2_integration" "integration" {
 }
 
 resource "aws_apigatewayv2_route" "route" {
-  api_id = aws_apigatewayv2_api.gateway.id
+  api_id = aws_apigatewayv2_api.api_gateway.id
 
   route_key = "GET /getData"
   target    = "integrations/${aws_apigatewayv2_integration.integration.id}"
 }
 
 resource "aws_cloudwatch_log_group" "log_grp" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.gateway.name}"
+  name = "/aws/api_gw/${aws_apigatewayv2_api.api_gateway.name}"
 
   retention_in_days = 30
 }
@@ -55,5 +55,5 @@ resource "aws_lambda_permission" "permission" {
   function_name = aws_lambda_function.lambda_java.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_apigatewayv2_api.gateway.execution_arn}/*/*"
+  source_arn = "${aws_apigatewayv2_api.api_gateway.execution_arn}/*/*"
 }
