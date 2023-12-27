@@ -51,7 +51,7 @@ resource "aws_s3_object" "s3_lambda_java" {
 
 data "archive_file" "archive" {
   type = "zip"
-  source_dir  = "${path.module}/"local.nodeKeyName
+  source_dir  = format("${path.module}/%s",local.nodeKeyName)
   output_path = format("${path.module}/%s",local.nodeFileName)
 }
 
