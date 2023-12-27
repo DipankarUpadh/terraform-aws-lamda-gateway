@@ -12,6 +12,7 @@ locals{
   jarKeyName="java_jar"
   jarFileName="AwsLamda.jar"
   
+  nodeFile="AwsLambdaNode"
   nodeKeyName="node_zip"
   nodeFileName="AwsLambdaNode.zip"
   
@@ -51,7 +52,7 @@ resource "aws_s3_object" "s3_lambda_java" {
 
 data "archive_file" "archive" {
   type = "zip"
-  source_dir  = format("${path.module}/%s",local.nodeKeyName)
+  source_dir  = format("${path.module}/%s",local.nodeFile)
   output_path = format("${path.module}/%s",local.nodeFileName)
 }
 
