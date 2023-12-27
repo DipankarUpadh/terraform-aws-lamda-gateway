@@ -11,6 +11,10 @@ provider "aws" {
 locals{
   jarKeyName="java_jar"
   jarFileName="AwsLamda.jar"
+  
+  nodeKeyName="node_zip"
+  nodeFileName="AwsLambdaNode.zip"
+  
 }
 
 resource "random_pet" "lambda_bucket_name" {
@@ -36,11 +40,26 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
   acl    = "private"
 }
 
-resource "aws_s3_object" "lambda_java" {
+resource "aws_s3_object" "s3_lambda_java" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
   key    = local.jarKeyName
   source = local.jarFileName
 
   etag = filemd5(local.jarFileName)
+}
+
+data "archive_file" "archive" {
+  type = "zip"
+  source_dir  = "${path.module}/local.nodeKeyName"
+  output_path = "${path.module}/local.nodeFileName"
+}
+
+resource "aws_s3_object" "s3_lambda_node" {
+  bucket = aws_s3_bucket.lambda_bucket.id
+
+  key    = nodeKeyName
+  source = data.archive_file.archive.output_path
+
+  etag = filemd5(data.archive_file.archive.output_path)
 }

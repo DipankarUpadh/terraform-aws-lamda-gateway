@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda_java" {
-  function_name = "t_lambda"
+  function_name = "t_lambda_java"
   role = aws_iam_role.lambda_exec.arn
   runtime = "java11"
   handler = "com.lambda.SimpleHandler::handleRequest"
@@ -7,6 +7,16 @@ resource "aws_lambda_function" "lambda_java" {
   source_code_hash = filebase64sha256(local.jarFileName)
   memory_size = 256
   timeout = 60
+}
+
+resource "aws_lambda_function" "hello_world" {
+  function_name = "t_lambda_node"
+  role = aws_iam_role.lambda_exec.arn
+  runtime = "nodejs12.x"
+  handler = "hello.handler"
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_object.s3_lambda_node.key
+  source_code_hash = data.archive_file.lambda_hello_world.output_base64sha256
 }
 
 resource "aws_cloudwatch_log_group" "lambda_java" {
