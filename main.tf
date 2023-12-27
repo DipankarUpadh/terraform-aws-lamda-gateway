@@ -12,7 +12,7 @@ locals{
   jarKeyName="java_jar"
   jarFileName="AwsLamda.jar"
   
-  nodeFile="AwsLambdaNode"
+  nodeSourceFile="AwsLambdaNode"
   nodeKeyName="node_zip"
   nodeFileName="AwsLambdaNode.zip"
   
