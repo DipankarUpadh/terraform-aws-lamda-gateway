@@ -12,7 +12,7 @@ resource "aws_lambda_function" "lambda_java" {
 resource "aws_lambda_function" "lambda_node" {
   function_name = "t_lambda_node"
   role = aws_iam_role.lambda_exec.arn
-  runtime = "nodejs12.x"
+  runtime = "nodejs18.x"
   handler = "hello.handler"
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.s3_lambda_node.key
