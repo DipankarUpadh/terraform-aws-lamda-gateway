@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda_java" {
-  function_name = "t_lambda_api_gw"
+  function_name = "t_lambda"
   role = aws_iam_role.lambda_exec.arn
   runtime = "java11"
   handler = "com.lambda.SimpleHandler::handleRequest"

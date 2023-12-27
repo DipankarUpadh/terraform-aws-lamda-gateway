@@ -1,5 +1,5 @@
-resource "aws_apigatewayv2_api" "gateway" {
-  name          = "lambda_gw"
+resource "aws_apigatewayv2_api" "api_gateway" {
+  name          = "t_api_gateway"
   protocol_type = "HTTP"
 }
 
@@ -43,13 +43,13 @@ resource "aws_apigatewayv2_route" "route" {
   target    = "integrations/${aws_apigatewayv2_integration.integration.id}"
 }
 
-resource "aws_cloudwatch_log_group" "api_gw" {
+resource "aws_cloudwatch_log_group" "log_grp" {
   name = "/aws/api_gw/${aws_apigatewayv2_api.gateway.name}"
 
   retention_in_days = 30
 }
 
-resource "aws_lambda_permission" "api_gw" {
+resource "aws_lambda_permission" "permission" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda_java.function_name
