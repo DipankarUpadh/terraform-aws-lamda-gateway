@@ -6,7 +6,7 @@ resource "aws_apigatewayv2_api" "gateway" {
 resource "aws_apigatewayv2_stage" "gateway" {
   api_id = aws_apigatewayv2_api.gateway.id
 
-  name        = "gateway_stage"
+  name        = "stage"
   auto_deploy = true
 
   access_log_settings {
@@ -39,7 +39,7 @@ resource "aws_apigatewayv2_integration" "integration" {
 resource "aws_apigatewayv2_route" "route" {
   api_id = aws_apigatewayv2_api.gateway.id
 
-  route_key = "GET /hello"
+  route_key = "GET /getData"
   target    = "integrations/${aws_apigatewayv2_integration.integration.id}"
 }
 
