@@ -3,14 +3,14 @@ resource "aws_apigatewayv2_api" "api_gateway" {
   protocol_type = "HTTP"
 }
 
-resource "aws_apigatewayv2_stage" "gateway" {
-  api_id = aws_apigatewayv2_api.gateway.id
+resource "aws_apigatewayv2_stage" "stage" {
+  api_id = aws_apigatewayv2_api.api_gateway.id
 
   name        = "stage"
   auto_deploy = true
 
   access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.api_gw.arn
+    destination_arn = aws_cloudwatch_log_group.log_grp.arn
 
     format = jsonencode({
       requestId               = "$context.requestId"
