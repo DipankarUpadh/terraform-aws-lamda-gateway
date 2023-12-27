@@ -9,14 +9,14 @@ resource "aws_lambda_function" "lambda_java" {
   timeout = 60
 }
 
-resource "aws_lambda_function" "hello_world" {
+resource "aws_lambda_function" "lambda_node" {
   function_name = "t_lambda_node"
   role = aws_iam_role.lambda_exec.arn
   runtime = "nodejs12.x"
   handler = "hello.handler"
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.s3_lambda_node.key
-  source_code_hash = data.archive_file.lambda_hello_world.output_base64sha256
+  source_code_hash = data.archive_file.archive.output_base64sha256
 }
 
 resource "aws_cloudwatch_log_group" "lambda_java" {
