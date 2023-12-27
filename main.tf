@@ -9,6 +9,11 @@ provider "aws" {
 
 }
 
+locals{
+  jarKeyName="java_jar"
+  jarFileName="AwsLamda.jar"
+}
+
 resource "random_pet" "lambda_bucket_name" {
   prefix = "terraform-functions"
   length = 2
@@ -35,10 +40,10 @@ resource "aws_s3_bucket_acl" "lambda_bucket" {
 resource "aws_s3_object" "lambda_java" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
-  key    = "AwsLamda.jar"
-  source = "AwsLamda.jar"
+  key    = local.jarKeyName
+  source = local.jarFileName
 
-  etag = filemd5("AwsLamda.jar")
+  etag = filemd5(local.jarFileName)
 }
 
 
@@ -47,8 +52,8 @@ resource "aws_lambda_function" "lambda_java" {
   role = aws_iam_role.lambda_exec.arn
   runtime = "java11"
   handler = "com.lambda.SimpleHandler::handleRequest"
-  filename = "AwsLamda.jar"
-  source_code_hash = filebase64sha256("AwsLamda.jar")
+  filename = local.jarFileName
+  source_code_hash = filebase64sha256(local.jarFileName)
   memory_size = 256
   timeout = 60
 }
