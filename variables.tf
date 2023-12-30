@@ -4,8 +4,13 @@ variable "aws_region" {
   description = "AWS region for all resources."
 
   type    = string
-  default = "ap-south-1"
+  default = "us-east-1"
 }
+
+variable "bucket_name"
+
+	type = String
+	deafult = poc_bucket
 
 variable "aws_access_key" {
   # set aws access key
