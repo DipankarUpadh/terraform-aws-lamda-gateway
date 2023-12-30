@@ -9,7 +9,7 @@ variable "aws_region" {
 
 variable "bucket_name"
 
-	type = String
+	type = string
 	deafult = poc_bucket
 
 variable "aws_access_key" {
