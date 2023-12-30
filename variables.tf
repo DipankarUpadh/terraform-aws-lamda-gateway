@@ -7,10 +7,10 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "bucket_name"
-
+variable "bucket_name"{
 	type = string
 	deafult = poc_bucket
+}
 
 variable "aws_access_key" {
   # set aws access key
