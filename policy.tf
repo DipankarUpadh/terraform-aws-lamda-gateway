@@ -1,7 +1,6 @@
 data "aws_iam_policy_document" "policy_document" {
   statement {
     actions   = ["s3:ListAllMyBuckets",
-				 "s3:GetObject",
                 "s3:ListBucket"]
     resources = ["arn:aws:s3:::${aws_s3_bucket.lambda_bucket.id}"]
     effect = "Allow"
@@ -19,7 +18,7 @@ resource "aws_iam_policy" "iam_policy" {
   policy = data.aws_iam_policy_document.policy_document.json
 }
 
-resource "aws_iam_role_policy_attachment" "policy_attachment_1" {
+resource "aws_iam_role_policy_attachment" "policy_attachment" {
    for_each = toset([
     aws_iam_policy.iam_policy.arn,
     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
