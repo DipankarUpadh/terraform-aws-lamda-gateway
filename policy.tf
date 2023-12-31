@@ -3,12 +3,12 @@ data "aws_iam_policy_document" "policy_document" {
     actions   = ["s3:ListAllMyBuckets",
 				 "s3:GetObject",
                 "s3:ListBucket"]
-    resources = ["arn:aws:s3:::aws_s3_bucket.lambda_bucket.id"]
+    resources = ["arn:aws:s3:::${aws_s3_bucket.lambda_bucket.id}"]
     effect = "Allow"
   }
   statement {
     actions   = ["s3:GetObject"]
-    resources = [aws_s3_bucket.lambda_bucket.arn/*]
+    resources = ["arn:aws:s3:::${aws_s3_bucket.lambda_bucket.id}/*"]
     effect = "Allow"
   }
 }
