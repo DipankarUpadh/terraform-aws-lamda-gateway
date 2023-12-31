@@ -19,12 +19,11 @@ resource "aws_iam_policy" "iam_policy" {
   policy = data.aws_iam_policy_document.policy_document.json
 }
 
-resource "aws_iam_user_policy_attachment" "policy_attachment_1" {
-  user       = aws_iam_role.t_iam_role.name
-  policy_arn = aws_iam_policy.iam_policy.arn
-}
-
-resource "aws_iam_user_policy_attachment" "policy_attachment_2" {
-  user       = aws_iam_role.t_iam_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+resource "aws_iam_role_policy_attachment" "policy_attachment_1" {
+   for_each = toset([
+    aws_iam_policy.iam_policy.arn,
+    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  ])
+  role       = aws_iam_role.t_iam_role.name
+  policy_arn = each.value
 }
