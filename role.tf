@@ -14,6 +14,6 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "t_iam_role" {
-  name = resource.aws_iam_user.name
+  name = resource.aws_iam_user.user.name
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
