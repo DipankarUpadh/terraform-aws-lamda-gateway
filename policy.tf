@@ -14,8 +14,8 @@ data "aws_iam_policy_document" "policy_document" {
 }
 
 resource "aws_iam_policy" "iam_policy" {
-  name        = "${random_pet.pet_name.id}-policy"
-  description = "My test policy"
+  name        = "t-lambda-s3-policy"
+  description = "My policy"
   policy = data.aws_iam_policy_document.policy_document.json
 }
 

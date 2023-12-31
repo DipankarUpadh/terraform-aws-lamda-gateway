@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "lambda_java" {
   function_name = "t_lambda_java"
-  role = aws_iam_role.lambda_exec.arn
+  role = aws_iam_role.t_iam_role.arn
   runtime = "java11"
   handler = "com.lambda.SimpleHandler::handleRequest"
   filename = local.jarFileName
@@ -11,7 +11,7 @@ resource "aws_lambda_function" "lambda_java" {
 
 resource "aws_lambda_function" "lambda_node" {
   function_name = "t_lambda_node"
-  role = aws_iam_role.lambda_exec.arn
+  role = aws_iam_role.t_iam_role.arn
   runtime = "nodejs18.x"
   handler = "hello.handler"
   s3_bucket = aws_s3_bucket.lambda_bucket.id

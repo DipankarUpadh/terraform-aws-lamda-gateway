@@ -18,7 +18,7 @@ locals{
   
 }
 
-resource "random_pet" "lambda_bucket_name" {
+resource "random_pet" "random_no" {
   prefix = "terraform-functions"
   length = 2
 }
