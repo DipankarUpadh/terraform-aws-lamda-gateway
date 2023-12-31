@@ -21,3 +21,7 @@ output "base_url" {
 
   value = aws_apigatewayv2_stage.stage.invoke_url
 }
+
+output "rendered_policy" {
+  value = data.aws_iam_policy_document.policy_document.json
+}
